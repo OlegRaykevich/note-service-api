@@ -18,86 +18,86 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// NoteServiceClient is the client API for NoteService service.
+// NoteV1Client is the client API for NoteV1 service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type NoteServiceClient interface {
+type NoteV1Client interface {
 	CreateNote(ctx context.Context, in *CreateNoteRequest, opts ...grpc.CallOption) (*CreateNoteResponse, error)
 }
 
-type noteServiceClient struct {
+type noteV1Client struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewNoteServiceClient(cc grpc.ClientConnInterface) NoteServiceClient {
-	return &noteServiceClient{cc}
+func NewNoteV1Client(cc grpc.ClientConnInterface) NoteV1Client {
+	return &noteV1Client{cc}
 }
 
-func (c *noteServiceClient) CreateNote(ctx context.Context, in *CreateNoteRequest, opts ...grpc.CallOption) (*CreateNoteResponse, error) {
+func (c *noteV1Client) CreateNote(ctx context.Context, in *CreateNoteRequest, opts ...grpc.CallOption) (*CreateNoteResponse, error) {
 	out := new(CreateNoteResponse)
-	err := c.cc.Invoke(ctx, "/api.note_v1.NoteService/CreateNote", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.note_v1.NoteV1/CreateNote", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// NoteServiceServer is the server API for NoteService service.
-// All implementations must embed UnimplementedNoteServiceServer
+// NoteV1Server is the server API for NoteV1 service.
+// All implementations must embed UnimplementedNoteV1Server
 // for forward compatibility
-type NoteServiceServer interface {
+type NoteV1Server interface {
 	CreateNote(context.Context, *CreateNoteRequest) (*CreateNoteResponse, error)
-	mustEmbedUnimplementedNoteServiceServer()
+	mustEmbedUnimplementedNoteV1Server()
 }
 
-// UnimplementedNoteServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedNoteServiceServer struct {
+// UnimplementedNoteV1Server must be embedded to have forward compatible implementations.
+type UnimplementedNoteV1Server struct {
 }
 
-func (UnimplementedNoteServiceServer) CreateNote(context.Context, *CreateNoteRequest) (*CreateNoteResponse, error) {
+func (UnimplementedNoteV1Server) CreateNote(context.Context, *CreateNoteRequest) (*CreateNoteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateNote not implemented")
 }
-func (UnimplementedNoteServiceServer) mustEmbedUnimplementedNoteServiceServer() {}
+func (UnimplementedNoteV1Server) mustEmbedUnimplementedNoteV1Server() {}
 
-// UnsafeNoteServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to NoteServiceServer will
+// UnsafeNoteV1Server may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to NoteV1Server will
 // result in compilation errors.
-type UnsafeNoteServiceServer interface {
-	mustEmbedUnimplementedNoteServiceServer()
+type UnsafeNoteV1Server interface {
+	mustEmbedUnimplementedNoteV1Server()
 }
 
-func RegisterNoteServiceServer(s grpc.ServiceRegistrar, srv NoteServiceServer) {
-	s.RegisterService(&NoteService_ServiceDesc, srv)
+func RegisterNoteV1Server(s grpc.ServiceRegistrar, srv NoteV1Server) {
+	s.RegisterService(&NoteV1_ServiceDesc, srv)
 }
 
-func _NoteService_CreateNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _NoteV1_CreateNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateNoteRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NoteServiceServer).CreateNote(ctx, in)
+		return srv.(NoteV1Server).CreateNote(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.note_v1.NoteService/CreateNote",
+		FullMethod: "/api.note_v1.NoteV1/CreateNote",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NoteServiceServer).CreateNote(ctx, req.(*CreateNoteRequest))
+		return srv.(NoteV1Server).CreateNote(ctx, req.(*CreateNoteRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// NoteService_ServiceDesc is the grpc.ServiceDesc for NoteService service.
+// NoteV1_ServiceDesc is the grpc.ServiceDesc for NoteV1 service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var NoteService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.note_v1.NoteService",
-	HandlerType: (*NoteServiceServer)(nil),
+var NoteV1_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "api.note_v1.NoteV1",
+	HandlerType: (*NoteV1Server)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "CreateNote",
-			Handler:    _NoteService_CreateNote_Handler,
+			Handler:    _NoteV1_CreateNote_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
