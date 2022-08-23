@@ -3,23 +3,26 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
+
 	desc "github.com/OlegRaykevich/testGRPC/pkg/note_v1"
 	"google.golang.org/grpc"
-	"log"
 )
 
 const address = "localhost:50051"
 
 func main() {
+	ctx := context.Background()
+
 	con, err := grpc.Dial(address, grpc.WithInsecure())
 	if err != nil {
-		log.Fatalf("didn't connect: %s", err.Error())
+		log.Fatalf("Failed to grpc connect: %s", err.Error())
 	}
 	defer con.Close()
 
 	client := desc.NewNoteV1Client(con)
 
-	resCreateNote, err := client.CreateNote(context.Background(), &desc.CreateNoteRequest{
+	resCreateNote, err := client.CreateNote(ctx, &desc.CreateNoteRequest{
 		Title:  "Shop List",
 		Text:   "milk",
 		Author: "Oleg",
@@ -30,7 +33,7 @@ func main() {
 
 	log.Println("created note id: ", resCreateNote.GetId())
 
-	resGetNote, err := client.GetNote(context.Background(), &desc.GetNoteRequest{
+	resGetNote, err := client.GetNote(ctx, &desc.GetNoteRequest{
 		Id: 1,
 	})
 	if err != nil {
@@ -41,7 +44,7 @@ func main() {
 	log.Println("get note text: ", resGetNote.GetText())
 	log.Println("get note author: ", resGetNote.GetAuthor())
 
-	resUpdateNote, err := client.UpdateNote(context.Background(), &desc.UpdateNoteRequest{
+	resUpdateNote, err := client.UpdateNote(ctx, &desc.UpdateNoteRequest{
 		Id:       1,
 		NewTitle: "newName",
 		Text:     "New text",
@@ -52,7 +55,7 @@ func main() {
 
 	fmt.Println("Result update: ", resUpdateNote.Result)
 
-	resDeleteNote, err := client.DeleteNote(context.Background(), &desc.DeleteNoteRequest{
+	resDeleteNote, err := client.DeleteNote(ctx, &desc.DeleteNoteRequest{
 		Id: 1,
 	})
 	if err != nil {
@@ -60,5 +63,4 @@ func main() {
 	}
 
 	fmt.Println("Result delete: ", resDeleteNote.Result)
-
 }
