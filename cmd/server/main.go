@@ -5,9 +5,10 @@ import (
 	"log"
 	"net"
 
-	"github.com/OlegRaykevich/testGRPC/internal/app/api/note_v1"
-	desc "github.com/OlegRaykevich/testGRPC/pkg/note_v1"
 	"google.golang.org/grpc"
+
+	"github.com/OlegRaykevich/note-service-api/internal/app/api/note_v1"
+	desc "github.com/OlegRaykevich/note-service-api/pkg/note_v1"
 )
 
 const port = ":50051"

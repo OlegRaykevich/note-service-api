@@ -4,16 +4,29 @@ import (
 	"context"
 	"fmt"
 
-	desc "github.com/OlegRaykevich/testGRPC/pkg/note_v1"
+	desc "github.com/OlegRaykevich/note-service-api/pkg/note_v1"
 )
 
-func (n *Note) GetNoteList(ctx context.Context, req *desc.GetNoteListRequest) (*desc.GetNoteListResponse, error) {
+func (n *Implementation) GetNoteList(ctx context.Context, req *desc.GetNoteListRequest) (*desc.GetNoteListResponse, error) {
 	fmt.Println("GetNote working")
-	fmt.Println(req.GetId()[0])
+	for _, elem := range req.GetIds() {
+		fmt.Println(elem)
+	}
 
 	return &desc.GetNoteListResponse{
-		Title:  []string{"titles"},
-		Text:   []string{"texts"},
-		Author: []string{"Authors"},
+		Note: []*desc.NoteInfo{
+			{
+				Id:     1,
+				Title:  "title",
+				Text:   "text",
+				Author: "Author1",
+			},
+			{
+				Id:     2,
+				Title:  "second Title",
+				Text:   "second text",
+				Author: "Author2",
+			},
+		},
 	}, nil
 }

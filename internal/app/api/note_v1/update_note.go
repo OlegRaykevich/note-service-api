@@ -4,17 +4,14 @@ import (
 	"context"
 	"fmt"
 
-	desc "github.com/OlegRaykevich/testGRPC/pkg/note_v1"
+	desc "github.com/OlegRaykevich/note-service-api/pkg/note_v1"
 )
 
-func (n *Note) UpdateNote(ctx context.Context, req *desc.UpdateNoteRequest) (*desc.UpdateNoteResponse, error) {
+func (n *Implementation) UpdateNote(ctx context.Context, req *desc.UpdateNoteRequest) (*desc.Empty, error) {
 	fmt.Println("UpdateNote working")
 	req.GetId()
 	req.GetText()
 	req.GetNewTitle()
 
-	fmt.Println("Update success")
-	return &desc.UpdateNoteResponse{
-		Result: true,
-	}, nil
+	return &desc.Empty{}, nil
 }

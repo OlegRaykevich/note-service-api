@@ -1,13 +1,13 @@
 package note_v1
 
 import (
-	desc "github.com/OlegRaykevich/testGRPC/pkg/note_v1"
+	desc "github.com/OlegRaykevich/note-service-api/pkg/note_v1"
 )
 
-type Note struct {
+type Implementation struct {
 	desc.UnimplementedNoteV1Server
 }
 
-func NewNote() *Note {
-	return &Note{}
+func NewNote() *Implementation {
+	return &Implementation{}
 }

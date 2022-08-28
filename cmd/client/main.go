@@ -2,11 +2,11 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 
-	desc "github.com/OlegRaykevich/testGRPC/pkg/note_v1"
 	"google.golang.org/grpc"
+
+	desc "github.com/OlegRaykevich/note-service-api/pkg/note_v1"
 )
 
 const address = "localhost:50051"
@@ -33,18 +33,14 @@ func main() {
 
 	log.Println("created note id: ", resCreateNote.GetId())
 
-	resGetNote, err := client.GetNote(ctx, &desc.GetNoteRequest{
+	_, err = client.GetNote(ctx, &desc.GetNoteRequest{
 		Id: 1,
 	})
 	if err != nil {
 		log.Println(err.Error())
 	}
 
-	log.Println("get note title: ", resGetNote.GetTitle())
-	log.Println("get note text: ", resGetNote.GetText())
-	log.Println("get note author: ", resGetNote.GetAuthor())
-
-	resUpdateNote, err := client.UpdateNote(ctx, &desc.UpdateNoteRequest{
+	_, err = client.UpdateNote(ctx, &desc.UpdateNoteRequest{
 		Id:       1,
 		NewTitle: "newName",
 		Text:     "New text",
@@ -53,14 +49,10 @@ func main() {
 		log.Println(err.Error())
 	}
 
-	fmt.Println("Result update: ", resUpdateNote.Result)
-
-	resDeleteNote, err := client.DeleteNote(ctx, &desc.DeleteNoteRequest{
+	_, err = client.DeleteNote(ctx, &desc.DeleteNoteRequest{
 		Id: 1,
 	})
 	if err != nil {
 		log.Println(err.Error())
 	}
-
-	fmt.Println("Result delete: ", resDeleteNote.Result)
 }

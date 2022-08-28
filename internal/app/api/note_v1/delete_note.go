@@ -4,15 +4,12 @@ import (
 	"context"
 	"fmt"
 
-	desc "github.com/OlegRaykevich/testGRPC/pkg/note_v1"
+	desc "github.com/OlegRaykevich/note-service-api/pkg/note_v1"
 )
 
-func (n *Note) DeleteNote(ctx context.Context, req *desc.DeleteNoteRequest) (*desc.DeleteNoteResponse, error) {
+func (n *Implementation) DeleteNote(ctx context.Context, req *desc.DeleteNoteRequest) (*desc.Empty, error) {
 	fmt.Println("DeleteNote working")
 	req.GetId()
 
-	fmt.Println("Delete success")
-	return &desc.DeleteNoteResponse{
-		Result: true,
-	}, nil
+	return &desc.Empty{}, nil
 }
