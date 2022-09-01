@@ -41,9 +41,12 @@ func main() {
 	}
 
 	_, err = client.UpdateNote(ctx, &desc.UpdateNoteRequest{
-		Id:       1,
-		NewTitle: "newName",
-		Text:     "New text",
+		Note: &desc.NoteInfo{
+			Id:     1,
+			Title:  "title name",
+			Text:   "some text",
+			Author: "user",
+		},
 	})
 	if err != nil {
 		log.Println(err.Error())

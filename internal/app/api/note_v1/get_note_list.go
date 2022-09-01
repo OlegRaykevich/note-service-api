@@ -9,8 +9,8 @@ import (
 
 func (n *Implementation) GetNoteList(ctx context.Context, req *desc.GetNoteListRequest) (*desc.GetNoteListResponse, error) {
 	fmt.Println("GetNote working")
-	for _, elem := range req.GetIds() {
-		fmt.Println(elem)
+	for _, id := range req.GetIds() {
+		fmt.Println(id)
 	}
 
 	return &desc.GetNoteListResponse{

@@ -9,7 +9,6 @@ import (
 
 func (n *Implementation) DeleteNote(ctx context.Context, req *desc.DeleteNoteRequest) (*desc.Empty, error) {
 	fmt.Println("DeleteNote working")
-	req.GetId()
 
 	return &desc.Empty{}, nil
 }
