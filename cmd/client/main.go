@@ -52,9 +52,10 @@ func main() {
 	//	log.Println(err.Error())
 	//}
 	//
-	//_, err = client.DeleteNote(ctx, &desc.DeleteNoteRequest{
-	//	Id: 1,
-	//})
+	_, err = client.DeleteNote(ctx, &desc.DeleteNoteRequest{
+		Id: 1,
+	})
+
 	//if err != nil {
 	//	log.Println(err.Error())
 	//}
