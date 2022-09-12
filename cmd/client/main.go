@@ -40,23 +40,22 @@ func main() {
 	//	log.Println(err.Error())
 	//}
 	//
-	//_, err = client.UpdateNote(ctx, &desc.UpdateNoteRequest{
-	//	Note: &desc.NoteInfo{
-	//		Id:     1,
-	//		Title:  "title name",
-	//		Text:   "some text",
-	//		Author: "user",
-	//	},
-	//})
-	//if err != nil {
-	//	log.Println(err.Error())
-	//}
-	//
+	_, err = client.UpdateNote(ctx, &desc.UpdateNoteRequest{
+		Note: &desc.NoteInfo{
+			Id:     3,
+			Title:  "new name",
+			Text:   "new some text",
+			Author: "user322",
+		},
+	})
+	if err != nil {
+		log.Println(err.Error())
+	}
+
 	_, err = client.DeleteNote(ctx, &desc.DeleteNoteRequest{
 		Id: 1,
 	})
-
-	//if err != nil {
-	//	log.Println(err.Error())
-	//}
+	if err != nil {
+		log.Println(err.Error())
+	}
 }

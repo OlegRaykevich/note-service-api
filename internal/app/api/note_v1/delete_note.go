@@ -22,12 +22,6 @@ func (n *Implementation) DeleteNote(ctx context.Context, req *desc.DeleteNoteReq
 	}
 	defer db.Close()
 
-	//builder := sq.Insert(noteTable).
-	//	PlaceholderFormat(sq.Dollar).
-	//	Columns("title, text, author").
-	//	Values(req.GetTitle(), req.GetText(), req.GetAuthor()).
-	//	Suffix("returning id")
-
 	builder := sq.Delete(noteTable).
 		PlaceholderFormat(sq.Dollar).
 		Where(sq.Eq{"id": req.GetId()})
