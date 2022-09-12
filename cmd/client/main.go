@@ -33,29 +33,29 @@ func main() {
 
 	log.Println("created note id: ", resCreateNote.GetId())
 
-	_, err = client.GetNote(ctx, &desc.GetNoteRequest{
-		Id: 1,
-	})
-	if err != nil {
-		log.Println(err.Error())
-	}
-
-	_, err = client.UpdateNote(ctx, &desc.UpdateNoteRequest{
-		Note: &desc.NoteInfo{
-			Id:     1,
-			Title:  "title name",
-			Text:   "some text",
-			Author: "user",
-		},
-	})
-	if err != nil {
-		log.Println(err.Error())
-	}
-
-	_, err = client.DeleteNote(ctx, &desc.DeleteNoteRequest{
-		Id: 1,
-	})
-	if err != nil {
-		log.Println(err.Error())
-	}
+	//_, err = client.GetNote(ctx, &desc.GetNoteRequest{
+	//	Id: 1,
+	//})
+	//if err != nil {
+	//	log.Println(err.Error())
+	//}
+	//
+	//_, err = client.UpdateNote(ctx, &desc.UpdateNoteRequest{
+	//	Note: &desc.NoteInfo{
+	//		Id:     1,
+	//		Title:  "title name",
+	//		Text:   "some text",
+	//		Author: "user",
+	//	},
+	//})
+	//if err != nil {
+	//	log.Println(err.Error())
+	//}
+	//
+	//_, err = client.DeleteNote(ctx, &desc.DeleteNoteRequest{
+	//	Id: 1,
+	//})
+	//if err != nil {
+	//	log.Println(err.Error())
+	//}
 }
