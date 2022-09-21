@@ -11,8 +11,6 @@ import (
 )
 
 func (n *Implementation) DeleteNote(ctx context.Context, req *desc.DeleteNoteRequest) (*desc.Empty, error) {
-	fmt.Println("DeleteNote working")
-
 	dbDsn := fmt.Sprintf("host=%s port=%s dbname=%s user=%s password=%s sslmode=%s",
 		host, port, dbName, dbUser, dbPassword, sslMode)
 

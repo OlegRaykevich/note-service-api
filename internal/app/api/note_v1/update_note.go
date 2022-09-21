@@ -3,6 +3,7 @@ package note_v1
 import (
 	"context"
 	"fmt"
+	"time"
 
 	sq "github.com/Masterminds/squirrel"
 	"github.com/jmoiron/sqlx"
@@ -11,8 +12,6 @@ import (
 )
 
 func (n *Implementation) UpdateNote(ctx context.Context, req *desc.UpdateNoteRequest) (*desc.Empty, error) {
-	fmt.Println("UpdateNote working")
-
 	dbDsn := fmt.Sprintf("host=%s port=%s dbname=%s user=%s password=%s sslmode=%s",
 		host, port, dbName, dbUser, dbPassword, sslMode)
 
@@ -27,6 +26,7 @@ func (n *Implementation) UpdateNote(ctx context.Context, req *desc.UpdateNoteReq
 		Set("title", req.GetNote().GetTitle()).
 		Set("text", req.GetNote().GetText()).
 		Set("author", req.GetNote().GetAuthor()).
+		Set("updated_at", time.Now()).
 		Where(sq.Eq{"id": req.GetNote().GetId()})
 
 	query, args, err := builder.ToSql()
