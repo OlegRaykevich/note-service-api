@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"google.golang.org/grpc"
@@ -33,19 +34,29 @@ func main() {
 
 	log.Println("created note id: ", resCreateNote.GetId())
 
-	_, err = client.GetNote(ctx, &desc.GetNoteRequest{
-		Id: 1,
+	resGetNote, err := client.GetNote(ctx, &desc.GetNoteRequest{
+		Id: 5,
 	})
 	if err != nil {
 		log.Println(err.Error())
 	}
+	fmt.Println(resGetNote)
+
+	var ids = []int64{3, 5}
+	resGetNoteList, err := client.GetNoteList(ctx, &desc.GetNoteListRequest{
+		Ids: ids,
+	})
+	if err != nil {
+		log.Println(err.Error())
+	}
+	fmt.Println(resGetNoteList)
 
 	_, err = client.UpdateNote(ctx, &desc.UpdateNoteRequest{
 		Note: &desc.NoteInfo{
-			Id:     1,
-			Title:  "title name",
-			Text:   "some text",
-			Author: "user",
+			Id:     5,
+			Title:  "new name",
+			Text:   "new some text",
+			Author: "user322",
 		},
 	})
 	if err != nil {
